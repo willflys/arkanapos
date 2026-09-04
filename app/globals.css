@@ -1,0 +1,104 @@
+@import "tailwindcss";
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap');
+
+:root {
+  /* Brand — from Arkana style guide */
+  --color-bg: #090820;
+  --color-surface: #12102c;
+  --color-surface-2: #1a1740;
+  --color-border: #2a2660;
+  --color-violet: #7030ef;
+  --color-violet-light: #9163ff;
+  --color-violet-dark: #4f1fb0;
+  --color-magenta: #db1fff;
+  --color-white: #ffffff;
+  --color-text-muted: #a39cd1;
+  --color-text-faint: #6c6598;
+
+  /* Semantic */
+  --color-success: #2ee6a6;
+  --color-warning: #f5b942;
+  --color-danger: #ff5470;
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-border: var(--color-border);
+  --color-violet: var(--color-violet);
+  --color-violet-light: var(--color-violet-light);
+  --color-violet-dark: var(--color-violet-dark);
+  --color-magenta: var(--color-magenta);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-faint: var(--color-text-faint);
+  --font-sans: 'General Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-white);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-violet);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-2);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-violet-dark);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+
+/* Signature ambient glow — echoes the Arkana wallpaper capsule motif */
+.glow-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(70px);
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #receipt-print, #receipt-print * {
+    visibility: visible;
+  }
+  #receipt-print {
+    position: absolute;
+    inset: 0;
+    background: white !important;
+    color: black !important;
+  }
+}
