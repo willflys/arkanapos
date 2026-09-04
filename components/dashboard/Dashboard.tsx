@@ -1,7 +1,8 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
-import { TrendingUp, TrendingDown, ShoppingBag, Wallet, PackageX, Flame } from "lucide-react";
+import { TrendingUp, TrendingDown, PackageX, Flame } from "lucide-react";
 import { Card, GlowOrb } from "@/components/ui";
 import { formatRupiah } from "@/lib/utils";
 
@@ -9,13 +10,13 @@ export function StatCard({
   label,
   value,
   delta,
-  icon: Icon,
+  icon,
   glow = false,
 }: {
   label: string;
   value: string;
   delta?: number | null;
-  icon: typeof Wallet;
+  icon: ReactNode;
   glow?: boolean;
 }) {
   return (
@@ -27,7 +28,7 @@ export function StatCard({
           <p className="tabular mt-2 text-2xl font-semibold">{value}</p>
         </div>
         <div className="rounded-xl bg-violet/15 p-2.5 text-violet-light">
-          <Icon size={18} />
+          {icon}
         </div>
       </div>
       {delta !== undefined && delta !== null && (
@@ -154,5 +155,3 @@ export function LowStockAlert({
     </Card>
   );
 }
-
-export const DASHBOARD_ICONS = { ShoppingBag, Wallet };
