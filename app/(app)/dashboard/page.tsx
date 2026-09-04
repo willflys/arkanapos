@@ -57,7 +57,6 @@ export default async function DashboardPage() {
   const yesterdayRevenue = yesterdayOrders.reduce((s, o) => s + Number(o.total), 0);
   const avgOrderValue = todayOrders.length ? todayRevenue / todayOrders.length : 0;
 
-  // build 7-day series
   const series: { label: string; total: number }[] = [];
   for (let i = 6; i >= 0; i--) {
     const d = new Date(now);
@@ -67,7 +66,6 @@ export default async function DashboardPage() {
     series.push({ label: d.toLocaleDateString("id-ID", { weekday: "short" }), total });
   }
 
-  // top products
   const productMap = new Map<string, number>();
   (items ?? []).forEach((it) => {
     productMap.set(it.product_name, (productMap.get(it.product_name) ?? 0) + it.quantity);
@@ -77,7 +75,6 @@ export default async function DashboardPage() {
     .sort((a, b) => b.qty - a.qty)
     .slice(0, 5);
 
-  // low stock
   const lowStock = (inventory ?? [])
     .filter((inv: any) => inv.products?.is_active && Number(inv.stock_qty) <= Number(inv.low_stock_threshold))
     .map((inv: any) => ({
@@ -100,16 +97,16 @@ export default async function DashboardPage() {
           label="Pendapatan Hari Ini"
           value={formatRupiah(todayRevenue)}
           delta={pctChange(todayRevenue, yesterdayRevenue)}
-          icon={Wallet}
+          icon={<Wallet size={18} />}
           glow
         />
         <StatCard
           label="Total Order Hari Ini"
           value={String(todayOrders.length)}
           delta={pctChange(todayOrders.length, yesterdayOrders.length)}
-          icon={ShoppingBag}
+          icon={<ShoppingBag size={18} />}
         />
-        <StatCard label="Rata-rata Nilai Order" value={formatRupiah(avgOrderValue)} icon={Receipt} />
+        <StatCard label="Rata-rata Nilai Order" value={formatRupiah(avgOrderValue)} icon={<Receipt size={18} />} />
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
